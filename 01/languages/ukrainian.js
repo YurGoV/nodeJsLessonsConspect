@@ -1,0 +1,1 @@
+exports.ukrainian = () => 'Привіт!';
