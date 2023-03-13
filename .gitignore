@@ -1,7 +1,11 @@
 .idea
+node_modules
 01/node_modules
 01/.idea
 01/.vscode
 02/node_modules
 02/.idea
 02/.vscode
+03/node_modules
+03/.idea
+03/.vscode
