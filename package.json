@@ -2,10 +2,10 @@
   "name": "03",
   "version": "1.0.0",
   "description": "",
-  "main": "./03/index.js",
+  "main": "./03/server.js",
   "scripts": {
-    "test": "nodemon ./03/index.js",
-    "dev": "nodemon ./03/index.js",
+    "test": "nodemon ./03/server.js",
+    "dev": "nodemon ./03/server.js",
     "prod": "node server.js"
   },
   "keywords": [],
