@@ -5,7 +5,7 @@
   "main": "./03/index.js",
   "scripts": {
     "test": "nodemon ./03/index.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon ./03/index.js",
     "prod": "node server.js"
   },
   "keywords": [],

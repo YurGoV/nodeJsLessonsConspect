@@ -1,8 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
 const PORT = 3000;
+
+app.use(cors());
+
+app.use((req, res, next) => {
+  console.log('my middleware');
+
+  next();
+});
 
 app.get('/api/v1/html', (req, res) => {
   console.log(req.body);
@@ -22,5 +31,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running up on port ${PORT}
-  and available at http://locathost:${PORT}`);
+  api available at http://localhost:${PORT}/api/v1/`);
 });
