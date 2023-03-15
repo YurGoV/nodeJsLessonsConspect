@@ -1,12 +1,22 @@
-GET http://localhost:3000/api/v1/json
+GET http://localhost:3000/api/v1/user
 
 ###
+GET http://localhost:3000/api/v1/user/c94af2e5-d229-44f6-b1a8-1a2df2c784d8
 
+###
 POST http://localhost:3000/api/v1/user
 content-type: application/json
 
 {
     "name": "James",
+    "year": "1982"
+}
+###
+POST http://localhost:3000/api/v1/user
+content-type: application/json
+
+{
+    "name": "John",
     "year": "1982"
 }
 ###
