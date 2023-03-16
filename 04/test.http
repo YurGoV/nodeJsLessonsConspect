@@ -1,0 +1,30 @@
+GET http://localhost:3000/api/v1/users
+
+###
+GET http://localhost:3000/api/v1/users/c94af2e5-d229-44f6-b1a8-1a2df2c784d8
+###
+###
+PATCH  http://localhost:3000/api/v1/users/c94af2e5-d229-44f6-b1a8-1a2df2c784d8
+content-type: application/json
+
+{
+    "name": "James-upd_2",
+    "year": "1982"
+}
+###
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+    "name": "Jimm3",
+    "year": "1982"
+}
+###
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+    "name": "John",
+    "year": "1982"
+}
+###

@@ -1,11 +1,11 @@
 {
-  "name": "03",
+  "name": "04",
   "version": "1.0.0",
   "description": "",
-  "main": "./03/server.js",
+  "main": "./04/server.js",
   "scripts": {
-    "test": "nodemon ./03/server.js",
-    "dev": "nodemon ./03/server.js",
+    "test": "nodemon ./04/server.js",
+    "dev": "nodemon ./04/server.js",
     "prod": "node server.js"
   },
   "keywords": [],
