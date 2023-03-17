@@ -9,7 +9,7 @@ exports.createUser = async (req, res) => {
     // console.log(req.body);
     const { name, year } = req.body;
 
-    const dataFromDb = await fs.readFile('./04/models.json');
+    const dataFromDb = await fs.readFile('./04/models/models.json');
     const users = JSON.parse(dataFromDb);
     const newUser = {
       id: uuid(),
@@ -18,7 +18,7 @@ exports.createUser = async (req, res) => {
     };
     users.push(newUser);
 
-    await fs.writeFile('./04/models.json', JSON.stringify(users));
+    await fs.writeFile('./04/models/models.json', JSON.stringify(users));
 
     res.status(200).json({
       user: newUser,
@@ -32,7 +32,7 @@ exports.createUser = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const usersString = await fs.readFile('./04/models.json');
+    const usersString = await fs.readFile('./04/models/models.json');
     const users = JSON.parse(usersString);
     res.status(200).json({
       users,
@@ -47,7 +47,7 @@ exports.getUsers = async (req, res) => {
 exports.getUsersById = async (req, res) => {
   try {
     const { id } = req.params;
-    const usersString = await fs.readFile('./04/models.json');// TODO: duplicated 1
+    const usersString = await fs.readFile('./04/models/models.json'); // TODO: duplicated 1
     const users = await JSON.parse(usersString);
 
     const foundedUser = await users.find((item) => item.id === id);
@@ -69,11 +69,8 @@ exports.updateUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, year } = req.body;
-    console.log(':CL: ~ file: userControllers.js:11 ~ exports.createUser= ~ body:', req.body);
 
-    // console.log(name, year);
-
-    const usersString = await fs.readFile('./04/models.json');// TODO: duplicated 2
+    const usersString = await fs.readFile('./04/models/models.json'); // TODO: duplicated 2
     const users = await JSON.parse(usersString);
     // console.log(':CL: ~ file: userControllers.js:75 ~ exports.updateUserById= ~ users:', users);
     const foundedUser = await users.find((item) => item.id === id);
@@ -82,20 +79,35 @@ exports.updateUserById = async (req, res) => {
     if (year) foundedUser.year = year;
 
     const userIdx = users.findIndex((item) => item.id === id);
-    console.log(':CL: ~ file: userControllers.js:81 ~ exports.updateUserById= ~ userIdx:', userIdx);
+    // console.log(':CL: ~ file: userControllers.js:81 ~ exports.updateUserById= ~ userIdx:', userIdx);
     users[userIdx] = foundedUser;
 
-    await fs.writeFile('./04/models.json', JSON.stringify(users));
+    await fs.writeFile('./04/models/models.json', JSON.stringify(users));
 
     res.status(200).json({
-      user: foundedUser
+      user: foundedUser,
     });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
 
-    // console.log(':CL: ~ file: userControllers.js:76 ~ exports.updateUserById= ~ foundedUser:', foundedUser);
+/**
+ * * Delete user by id
+ */
+exports.deleteUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const usersString = await fs.readFile('./04/models/models.json'); // TODO: duplicated 3
+    const users = await JSON.parse(usersString);
 
-/*     res.status(200).json({
-      foundedUser,
-    }); */
+    const usersListToUpdate = await users.filter((item) => item.id !== id);
+
+    await fs.writeFile('./04/models/models.json', JSON.stringify(usersListToUpdate));
+
+    res.sendStatus(204); // ** if no need to response smth // status 204 - no content
   } catch (err) {
     res.status(500).json({
       message: err.message,
