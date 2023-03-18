@@ -1,12 +1,15 @@
 {
-  "name": "04",
+  "name": "05",
   "version": "1.0.0",
   "description": "",
-  "main": "./04/server.js",
+  "main": "./05/server.js",
   "scripts": {
-    "test": "nodemon ./04/server.js",
-    "dev": "nodemon ./04/server.js",
-    "prod": "node server.js"
+    "test": "nodemon ./05/server.js",
+    "dev": "nodemon ./05/server.js",
+    "prod": "node ./05/server.js",
+    "start": "node ./05/server.js",
+    "lint": "eslint ./05/*.js",
+    "lint:fix": "eslint --fix ./05/*.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "uuid": "^9.0.0"
   },
