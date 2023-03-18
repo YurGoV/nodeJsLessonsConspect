@@ -1,7 +1,7 @@
 const express = require('express');
 
 const userController = require('../controllers/userControllers');
-const userMiddlewares = require('../middlewars/userMiddlewares');
+const userMiddlewares = require('../middlewares/userMiddlewares');
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.use('/:id', userMiddlewares.checkUserId);
 router
   .route('/:id')
   .get(userController.getUsersById)
-  .patch(userController.updateUserById)
+  .patch(userMiddlewares.checkUserData, userController.updateUserById)
   .delete(userController.deleteUserById);
 
 module.exports = router;

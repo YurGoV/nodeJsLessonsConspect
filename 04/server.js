@@ -29,9 +29,22 @@ app.get('/api/v1/user', userController.getUsers);
 app.get('/api/v1/user/:id', userController.getUsersById); */
 app.use('/api/v1/users', userRouter);
 
-app.get('*', (req, res) => {
+app.all('*', (req, res) => {
   res.status(404).json({
     message: 'route not found',
+  });
+});
+
+/**
+ * * Global error handler (middleware)
+ */
+app.use((err, req, res, next) => {
+  let { status } = err; // there we get error status, that was setting on user useMiddlewares
+
+  if (!status) status = 500;
+
+  res.status(status).json({
+    message: err.message,
   });
 });
 
