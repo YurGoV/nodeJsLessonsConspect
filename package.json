@@ -5,7 +5,7 @@
   "main": "./05/server.js",
   "scripts": {
     "test": "nodemon ./05/server.js",
-    "dev": "nodemon ./05/server.js",
+    "dev": "NODE_ENV=development nodemon ./05/server.js",
     "prod": "node ./05/server.js",
     "start": "node ./05/server.js",
     "lint": "eslint ./05/*.js",
@@ -29,6 +29,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^4.3.8",
     "lint-staged": "^13.1.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
   },
   "lint-staged": {

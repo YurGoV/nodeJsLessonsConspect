@@ -7,6 +7,14 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
+/**
+ * * needed for development only (morgan installed as dev-dependency)
+ */
+if (process.env.NODE_ENV === 'development') {
+  const morgan = require('morgan');
+  app.use(morgan('dev'));
+}
+
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());

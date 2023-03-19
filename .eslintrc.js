@@ -10,6 +10,7 @@ module.exports = {
   extends: ['airbnb-base', 'eslint:recommended'],
   plugins: [],
   rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'array-bracket-newline': 'off',
     'array-element-newline': 'off',
     'arrow-body-style': 'error',

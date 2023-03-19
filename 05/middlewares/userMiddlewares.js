@@ -1,4 +1,5 @@
 const fs = require('fs').promises;
+const { CustomError } = require('../utils');
 
 /**
  * * Check new user data.
@@ -15,10 +16,10 @@ exports.checkUserId = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (id.length < 5) {
-      const error = new Error('Invalid user id!');
-      error.status = 400;
+      // const error = new Error('Invalid user id!');
+      // error.status = 400;
 
-      return next(error);
+      return next(new CustomError(400, 'Invalid user id!'));// TODO: change where is possible
     }
 
     const usersString = await fs.readFile('./04/models/models.json'); // TODO: duplicated 1

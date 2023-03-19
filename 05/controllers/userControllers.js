@@ -1,8 +1,56 @@
 const fs = require('fs').promises;
 const { v4: uuid } = require('uuid');
+const { catchAsyncWrapper } = require('../utils');
 
 /**
- * *Create user
+ * @Get user
+ */
+/* exports.getUsers = async (req, res) => {
+  try {
+    const usersString = await fs.readFile('./04/models/models.json');
+    const users = JSON.parse(usersString);
+    res.status(200).json({
+      users,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}; */
+// * with catchAsync more shortened:
+exports.getUsers = catchAsyncWrapper(async (req, res) => {
+  // TODO: refactoring all try/catch into wrapper
+  const usersString = await fs.readFile('./04/models/models.json');
+  const users = JSON.parse(usersString);
+  res.status(200).json({
+    users,
+  });
+});
+
+/**
+ * ? Get_by_Id user
+ */
+exports.getUsersById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const usersString = await fs.readFile('./04/models/models.json'); // TODO: duplicated 1
+    const users = await JSON.parse(usersString);
+
+    const foundedUser = await users.find((item) => item.id === id);
+
+    res.status(200).json({
+      foundedUser,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+/**
+ * @Create user
  */
 exports.createUser = async (req, res) => {
   try {
@@ -22,38 +70,6 @@ exports.createUser = async (req, res) => {
 
     res.status(200).json({
       user: newUser,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
-};
-
-exports.getUsers = async (req, res) => {
-  try {
-    const usersString = await fs.readFile('./04/models/models.json');
-    const users = JSON.parse(usersString);
-    res.status(200).json({
-      users,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message,
-    });
-  }
-};
-
-exports.getUsersById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const usersString = await fs.readFile('./04/models/models.json'); // TODO: duplicated 1
-    const users = await JSON.parse(usersString);
-
-    const foundedUser = await users.find((item) => item.id === id);
-
-    res.status(200).json({
-      foundedUser,
     });
   } catch (err) {
     res.status(500).json({
@@ -105,7 +121,10 @@ exports.deleteUserById = async (req, res) => {
 
     const usersListToUpdate = await users.filter((item) => item.id !== id);
 
-    await fs.writeFile('./04/models/models.json', JSON.stringify(usersListToUpdate));
+    await fs.writeFile(
+      './04/models/models.json',
+      JSON.stringify(usersListToUpdate)
+    );
 
     res.sendStatus(204); // ** if no need to response smth // status 204 - no content
   } catch (err) {
