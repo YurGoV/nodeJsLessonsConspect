@@ -10,15 +10,17 @@ content-type: application/json
 
 {
     "name": "James-upd_2/6",
-    "year": "1982"
+    "birthYear": "1982"
 }
 ###
 POST http://localhost:3000/api/v1/users
 content-type: application/json
 
 {
-    "name": "Jimm3/4",
-    "year": "1982"
+  "name": "Jimm3/4-2",
+  "email": "email2@email.com",
+  "password": "123432",
+  "birthYear": "1982"
 }
 ###
 POST http://localhost:3000/api/v1/users
