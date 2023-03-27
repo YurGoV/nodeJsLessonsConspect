@@ -1,23 +1,22 @@
 GET http://localhost:3000/api/v1/users
 
 ###
-GET http://localhost:3000/api/v1/users/c94af2e5-d229-44f6-b1a8-1a2df2c784d8
+GET http://localhost:3000/api/v1/users/64200a66f16f1209962f3079
 ###
-DELETE http://localhost:3000/api/v1/users/fa558a44-3bb9-41b7-960a-11cab21a0087
+DELETE http://localhost:3000/api/v1/users/64200ac115532a7774e74c6a
 ###
-PATCH  http://localhost:3000/api/v1/users/c94af2e5-d229-44f6-b1a8-1a2df2c784d8
+PATCH  http://localhost:3000/api/v1/users/642166c3bdd909be9a80507a
 content-type: application/json
 
 {
-    "name": "James-upd_2/6",
-    "birthYear": "1982"
+  "birthYear": 1983
 }
 ###
 POST http://localhost:3000/api/v1/users
 content-type: application/json
 
 {
-  "name": "Jimm3/4-2",
+  "name": "Jane",
   "email": "email2@email.com",
   "password": "123432",
   "birthYear": "1982"
