@@ -10,7 +10,7 @@ const PASSWD_REGEX =
  */
 exports.createUserValidator = (data) =>
   Joi.object()
-    .options({ abortEarly: false })
+    .options({ abortEarly: false })// TODO: одночасно повертає дві еррори
     .keys({
       name: Joi.string().max(30).alphanum().required(),
       email: Joi.string().email().required(),

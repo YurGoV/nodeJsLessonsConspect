@@ -7,8 +7,10 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
   },
-  extends: ['airbnb-base', 'eslint:recommended'],
-  plugins: [],
+  extends: ['airbnb-base', 'eslint:recommended', 'prettier'],
+  plugins: [
+    'prettier'
+  ],
   rules: {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'array-bracket-newline': 'off',
