@@ -7,6 +7,7 @@ require('dotenv')
 
 // const userController = require('./controllers/userControllers');
 const userRouter = require('./routes/userRoutes');
+const authRouter = require('./routes/authRoutes');
 
 const app = express();
 
@@ -30,6 +31,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cors());
 app.use(express.json());
 
+// Routes
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 
 app.all('*', (req, res) => {
@@ -64,3 +67,4 @@ app.listen(PORT, () => {
 // password select false in user model;
 // current data in update: {new: true};
 // перевірка, чи валідний ID // ObjectId.isValid(id);
+// видалити детальну валідацію паролю у джоі при логіні (зробити як тут)

@@ -55,17 +55,7 @@ exports.getUsersById = catchAsyncWrapper(async (req, res) => {
  * @Create user
  */
 exports.createUser = catchAsyncWrapper(async (req, res) => {
-  // try {
-  // console.log(req.body);
-  const {
-    name,
-    birthYear,
-    email,
-    password,
-    role
-  } = req.body;
-
-  // console.log(name, birthYear, email, password, role);
+  const { name, birthYear, email, password, role } = req.body;
   const newUser = await User.create({
     name,
     birthYear,
@@ -77,12 +67,6 @@ exports.createUser = catchAsyncWrapper(async (req, res) => {
   res.status(201).json({
     user: newUser,
   });
-  // } catch (err) {
-  //   res.status(500)
-  //     .json({
-  //       message: err.message,
-  //     });
-  // }
 });
 
 /**
@@ -141,7 +125,7 @@ exports.deleteUserById = catchAsyncWrapper(async (req, res) => {
   //     './04/models/models.json',
   //     JSON.stringify(usersListToUpdate)
   //   );
-  await User.findByIdAndDelete(id);// TODO: delete - by default. remove - if necessary;
+  await User.findByIdAndDelete(id); // TODO: delete - by default. remove - if necessary;
 
   res.sendStatus(204); // ** if no need to response smth // status 204 - no content
   // } catch (err) {

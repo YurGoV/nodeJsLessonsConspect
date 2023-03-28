@@ -10,14 +10,13 @@ const { createUserValidator } = require('./joiValidator');
  * * Check new user data.
  */
 exports.checkUserData = catchAsyncWrapper(async (req, res, next) => {
-  // console.log('~req.body userMiddleware [2]:', req.body);
   const { error, value } = createUserValidator(req.body);
-  // console.log(error);
-  // console.log(value);
+
   if (error) return next(new CustomError(400, error.details[0].message));
+  // if (error) return next(new CustomError(400, {mess: 'mess'}));
 
   const { email } = value;
-  // const userExists = await User.findOne({ email });
+
   const userExists = await User.exists({ email }); // повертає айді, якщо такий юзер вже є
 
   if (userExists) return next(new CustomError(409, 'email is already used'));

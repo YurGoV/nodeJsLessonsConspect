@@ -1,0 +1,32 @@
+GET http://localhost:3000/api/v1/users
+
+###
+GET http://localhost:3000/api/v1/users/64200a66f16f1209962f3079
+###
+DELETE http://localhost:3000/api/v1/users/64200ac115532a7774e74c6a
+###
+PATCH  http://localhost:3000/api/v1/users/642166c3bdd909be9a80507a
+content-type: application/json
+
+{
+  "birthYear": 1983
+}
+###
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+  "name": "Jackson",
+  "email": "email22@email.com",
+  "password": "Pass&1243",
+  "birthYear": "1982"
+}
+###
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+    "name": "Jo",
+    "year": "1982"
+}
+###

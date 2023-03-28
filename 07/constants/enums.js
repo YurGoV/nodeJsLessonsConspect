@@ -1,4 +1,4 @@
-exports.USER_ROLES_ENUM = {
+exports.USER_ROLES = {
   USER: 'user',
   MODERATOR: 'moderator',
   ADMIN: 'admin',

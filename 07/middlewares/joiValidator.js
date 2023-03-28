@@ -3,20 +3,20 @@ const Joi = require('joi');
 const { enums } = require('../constants');
 
 const PASSWD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,128})/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,32})/;
 
 /**
  * Validate create user data.
  */
 exports.createUserValidator = (data) =>
   Joi.object()
-    .options({ abortEarly: false })// TODO: одночасно повертає дві еррори
+    .options({ abortEarly: false })// TODO: одночасно повертає всі еррори
     .keys({
       name: Joi.string().max(30).alphanum().required(),
       email: Joi.string().email().required(),
-      birthyear: Joi.number().min(1940).required(),
+      birthYear: Joi.number().min(1940).required(),
       password: Joi.string().regex(PASSWD_REGEX).required(),
-      role: Joi.string().valid(...Object.values(enums.USER_ROLES_ENUM)),
+      role: Joi.string().valid(...Object.values(enums.USER_ROLES)),
     })
     .validate(data);
 
@@ -29,13 +29,14 @@ exports.updateUserValidator = (data) =>
     .keys({
       name: Joi.string().max(30).alphanum(),
       email: Joi.string().email(),
-      birthyear: Joi.number().min(1940),
+      birthYear: Joi.number().min(1940),
       role: Joi.string().valid(...Object.values(enums.USER_ROLES_ENUM)),
     })
     .validate(data);
 
 /**
  * Validate signup user data.
+ * *тут не кидаємо ролі/щоб юзер не зміг змінити ролі
  */
 exports.signupUserValidator = (data) =>
   Joi.object()
@@ -43,7 +44,7 @@ exports.signupUserValidator = (data) =>
     .keys({
       name: Joi.string().max(30).alphanum().required(),
       email: Joi.string().email().required(),
-      birthyear: Joi.number().min(1940).required(),
+      birthYear: Joi.number().min(1940).required(),
       password: Joi.string().regex(PASSWD_REGEX).required(),
     })
     .validate(data);
@@ -56,6 +57,6 @@ exports.loginValidator = (data) =>
     .options({ abortEarly: false })
     .keys({
       email: Joi.string().email().required(),
-      password: Joi.string().min(8).max(128).required(),
+      password: Joi.string().min(8).max(32).required(),
     })
     .validate(data);
