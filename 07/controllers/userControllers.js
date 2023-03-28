@@ -141,7 +141,7 @@ exports.deleteUserById = catchAsyncWrapper(async (req, res) => {
   //     './04/models/models.json',
   //     JSON.stringify(usersListToUpdate)
   //   );
-  await User.findByIdAndRemove(id);
+  await User.findByIdAndDelete(id);// TODO: delete - by default. remove - if necessary;
 
   res.sendStatus(204); // ** if no need to response smth // status 204 - no content
   // } catch (err) {
