@@ -16,9 +16,9 @@ POST http://localhost:3000/api/v1/users
 content-type: application/json
 
 {
-  "name": "Jane",
-  "email": "email2@email.com",
-  "password": "123432",
+  "name": "Jane21",
+  "email": "email2212@email.com",
+  "password": "123432&qwqeW",
   "birthYear": "1982"
 }
 ###
@@ -28,5 +28,17 @@ content-type: application/json
 {
     "name": "Jo",
     "year": "1982"
+}
+###
+
+###
+POST http://localhost:3000/api/v1/auth/signup
+content-type: application/json
+
+{
+  "name": "Jackson22",
+  "email": "email222@email.com",
+  "password": "Pass&1243",
+  "birthYear": "1982"
 }
 ###

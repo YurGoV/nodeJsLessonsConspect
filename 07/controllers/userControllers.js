@@ -1,4 +1,3 @@
-const fs = require('fs').promises;
 const { v4: uuid } = require('uuid');
 const { catchAsyncWrapper } = require('../utils');
 const User = require('../models/userModels');

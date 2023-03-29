@@ -62,9 +62,13 @@ app.listen(PORT, () => {
 });
 
 // TODO: in homework:
-// error wrapper
-// async wrapper
+// error wrapper;
+// async wrapper;
 // password select false in user model;
+// password undefined при відповідях (реєстрація, апдейт, тощо)
 // current data in update: {new: true};
 // перевірка, чи валідний ID // ObjectId.isValid(id);
 // видалити детальну валідацію паролю у джоі при логіні (зробити як тут)
+// uploaded file size limit
+//  mongosh auth hook - to homework
+// 

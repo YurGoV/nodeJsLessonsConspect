@@ -1,4 +1,6 @@
 // const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
 const { Schema, model } = require('mongoose');
 
 const { enums } = require('../constants');
@@ -36,6 +38,17 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.pre('save', async function(next) {
+  // TODO mongosh auth hook - to homework
+  const sault = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, sault);
+
+  next();
+});
+
+userSchema.methods.checkPassword = (candidate, hash) =>
+  bcrypt.compare(candidate, hash);
 
 const User = model('User', userSchema);
 
