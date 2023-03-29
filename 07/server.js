@@ -2,8 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-require('dotenv')
-  .config({ path: './06/.env' });
+require('dotenv').config({ path: './07/.env' });
 
 // const userController = require('./controllers/userControllers');
 const userRouter = require('./routes/userRoutes');
@@ -15,15 +14,16 @@ const app = express();
  * * needed for development only (morgan installed as dev-dependency)
  */
 const PORT = process.env.PORT || 4000;
-const { MONGO_URL } = process.env;
+const { MONGO_URL, NODE_ENV } = process.env;
 
-mongoose.connect(MONGO_URL)
+mongoose
+  .connect(MONGO_URL)
   .then((connection) => {
     console.log('connected to DB');
   })
   .catch((error) => console.log(error));
 
-if (process.env.NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
   const morgan = require('morgan');
   app.use(morgan('dev'));
 }
@@ -36,24 +36,31 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 
 app.all('*', (req, res) => {
-  res.status(404)
-    .json({
-      message: 'route not found',
-    });
+  res.status(404).json({
+    message: 'route not found',
+  });
 });
 
 /**
  * * Global error handler (middleware)
  */
 app.use((err, req, res, next) => {
-  let { status } = err; // there we get error status, that was setting on user useMiddlewares
+  const { status } = err; // there we get error status, that was setting on user useMiddlewares
 
-  if (!status) status = 500;
+  // if (!status) status = 500;
 
-  res.status(status)
-    .json({
+  if (NODE_ENV === 'development') {
+    res.status(status || 500).json({
+      message: err.message,
+      stack: err.stack,
+    });
+  } else {
+    res.status(status || 500).json({
       message: err.message,
     });
+  }
+  // TODO: stack: err.stack// для розробки - конкретика по помилці - можна окремо під умовами оточення: дев та ін
+  // TODO: можна винести в окремий файл
 });
 
 app.listen(PORT, () => {
@@ -71,4 +78,4 @@ app.listen(PORT, () => {
 // видалити детальну валідацію паролю у джоі при логіні (зробити як тут)
 // uploaded file size limit
 //  mongosh auth hook - to homework
-// 
+//  dev/prod errors

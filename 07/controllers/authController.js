@@ -1,17 +1,17 @@
+const jwt = require('jsonwebtoken');
+
 const { enums } = require('../constants');
 const User = require('../models/userModels');
-const { catchAsyncWrapper } = require('../utils');
+const { catchAsyncWrapper, CustomError } = require('../utils');
+
+const { JWT_SECRET, JWT_EXPIRES } = process.env;
+
+const signToken = (id) =>
+  jwt.sign({ id }, JWT_SECRET, {
+    expiresIn: JWT_EXPIRES,
+  });
 
 exports.signup = catchAsyncWrapper(async (req, res) => {
-  const { password } = req.body;
-
-  // const isValid = await bcrypt.compare(password, hashedPassword);
-  // const sault = await bcrypt.genSalt(10);
-
-  // const hashedPassword = await bcrypt.hash(password, sault);
-
-  // console.log('~sault, hashedPassword authController.js [15]:', sault, hashedPassword);
-
   const newUserData = {
     ...req.body,
     role: enums.USER_ROLES.USER,
@@ -21,9 +21,28 @@ exports.signup = catchAsyncWrapper(async (req, res) => {
 
   newUser.password = undefined;
 
+  const token = signToken(newUser.id);
+  // TODO: PAUSE THERE
   res.status(201).json({
     user: newUser,
+    token,
   });
 });
 
-exports.login = catchAsyncWrapper(async (req, res, next) => {});
+exports.login = catchAsyncWrapper(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email }).select('+password');
+
+  if (!user) return next(new CustomError(401, 'no authorized..'));
+
+  const passwordIsValid = await user.checkPassword(password, user.password);
+
+  if (!passwordIsValid) return next(new CustomError(401, 'no authorized..'));
+
+  user.password = undefined;
+
+  res.status(200).json({
+    user,
+  });
+});
