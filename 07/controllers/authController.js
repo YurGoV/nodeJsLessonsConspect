@@ -22,7 +22,7 @@ exports.signup = catchAsyncWrapper(async (req, res) => {
   newUser.password = undefined;
 
   const token = signToken(newUser.id);
-  // TODO: PAUSE THERE
+
   res.status(201).json({
     user: newUser,
     token,
@@ -42,7 +42,10 @@ exports.login = catchAsyncWrapper(async (req, res, next) => {
 
   user.password = undefined;
 
+  const token = signToken(user.id);
+
   res.status(200).json({
     user,
+    token,
   });
 });

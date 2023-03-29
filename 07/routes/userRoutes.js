@@ -2,14 +2,16 @@ const express = require('express');
 
 const userController = require('../controllers/userControllers');
 const { userMiddlewares } = require('../middlewares');
+const { protect } = require('../middlewares');
 
 const router = express.Router();
 
 // router.post('/', userController.createUser);
 // router.get('/', userController.getUsers);
-router.route('/')
+router
+  .route('/')
   .post(userMiddlewares.checkUserData, userController.createUser)
-  .get(userController.getUsers);
+  .get(protect, userController.getUsers);
 
 // router.get('/:id', userController.getUsersById);
 // router.patch('/:id', userController.updateUserById);

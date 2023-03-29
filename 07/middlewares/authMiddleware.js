@@ -1,9 +1,13 @@
+const jwt = require('jsonwebtoken');
+
 const User = require('../models/userModels');
 const { catchAsyncWrapper, CustomError } = require('../utils');
 const { signupUserValidator } = require('./joiValidator');
 
-exports.checkSignupData = catchAsyncWrapper(async (req, res, next) => {
-  const { error, value } = signupUserValidator (req.body);
+const { JWT_SECRET } = process.env;
+
+const checkSignupData = catchAsyncWrapper(async (req, res, next) => {
+  const { error, value } = signupUserValidator(req.body);
 
   if (error) return next(new CustomError(400, error.details[0].message));
   // if (error) return next(new CustomError(400, {mess: 'mess'}));
@@ -18,3 +22,25 @@ exports.checkSignupData = catchAsyncWrapper(async (req, res, next) => {
 
   next();
 });
+
+const protect = catchAsyncWrapper(async (req, res, next) => {
+  
+  const token =
+    req.headers.authorization?.startsWith('Bearer') &&
+    req.headers.authorization.split(' ')[1];
+
+  if (!token) return next(new CustomError(401, 'You are not logged in..'));
+
+  const decodedToken = jwt.verify(token, JWT_SECRET);
+
+  const currentUser = await User.findById(decodedToken.id);
+
+  req.user = currentUser;
+
+  next();
+});
+
+module.exports = {
+  checkSignupData,
+  protect,
+};

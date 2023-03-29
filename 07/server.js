@@ -78,4 +78,4 @@ app.listen(PORT, () => {
 // видалити детальну валідацію паролю у джоі при логіні (зробити як тут)
 // uploaded file size limit
 //  mongosh auth hook - to homework
-//  dev/prod errors
+//  dev/prod errors (there - in server.js)
