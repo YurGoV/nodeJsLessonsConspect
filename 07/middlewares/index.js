@@ -2,7 +2,7 @@ const joiValidators = require('./joiValidator');
 const userMiddlewares = require('./userMiddlewares');
 const createUserValidator = require('./joiValidator');
 
-const { checkSignupData, protect } = require('./authMiddleware');
+const { checkSignupData, protect, allowFor } = require('./authMiddleware');
 
 const authMiddlewares = require('./authMiddleware');
 
@@ -13,4 +13,5 @@ module.exports = {
   authMiddlewares,
   checkSignupData,
   protect,
+  allowFor,
 };

@@ -24,7 +24,6 @@ const checkSignupData = catchAsyncWrapper(async (req, res, next) => {
 });
 
 const protect = catchAsyncWrapper(async (req, res, next) => {
-  
   const token =
     req.headers.authorization?.startsWith('Bearer') &&
     req.headers.authorization.split(' ')[1];
@@ -40,7 +39,21 @@ const protect = catchAsyncWrapper(async (req, res, next) => {
   next();
 });
 
+// TODO: rename
+/**
+ * * used after protect is passed
+ * @param  {...any} roles
+ * @returns
+ */
+const allowFor = (...roles) =>
+  (req, res, next) => {
+    if (roles.includes(req.user.role)) return next();
+
+    return next(new CustomError(403, 'You are have no permissions'));
+  };
+
 module.exports = {
   checkSignupData,
   protect,
+  allowFor
 };
