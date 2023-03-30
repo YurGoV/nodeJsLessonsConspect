@@ -1,10 +1,10 @@
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDEyNTk0NywiZXhwIjoxNjgwMzg1MTQ3fQ.Q45WMCSR0z0oX-NVofj2XImO6HmGLdcSoW4xBDcteG0
 @token_admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU1NjhlNzhiZDAxNjQyOWUxMTRiMCIsImlhdCI6MTY4MDE3MTEwOCwiZXhwIjoxNjgwNDMwMzA4fQ.fEyQgZdhOLhqUIVCdqsU-QJr7fZ1fGv7Zp0u3ka-lOA
-### FROM USER
+### GET USERS FROM USER
 GET http://localhost:3000/api/v1/users
 Authorization: Bearer {{token}}
 ###
-### FROM ADMIN
+### GET USERS FROM ADMIN
 GET http://localhost:3000/api/v1/users
 Authorization: Bearer {{token_admin}}
 ###

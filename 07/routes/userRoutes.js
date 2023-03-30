@@ -10,16 +10,18 @@ const {
 const { userMiddlewares } = require('../middlewares');
 const { protect, allowFor } = require('../middlewares');
 // const { allowFor } = require('../middlewares/authMiddleware');
-const {enums} = require('../constants')
- 
+const { enums } = require('../constants');
+
 const router = express.Router();
 
 // router.post('/', userController.createUser);
 // router.get('/', userController.getUsers);
-router
-  .route('/')
-  .post(userMiddlewares.checkUserData, createUser)
-  .get(protect, allowFor(enums.USER_ROLES.ADMIN), getUsers);
+
+router.use(protect);
+
+router.use(allowFor(enums.USER_ROLES.ADMIN, enums.USER_ROLES.MODERATOR));
+
+router.route('/').post(userMiddlewares.checkUserData, createUser).get(getUsers);
 
 // router.get('/:id', userController.getUsersById);
 // router.patch('/:id', userController.updateUserById);
