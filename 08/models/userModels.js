@@ -38,13 +38,13 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+// TODO mongosh auth hook - to homework
 
 userSchema.pre('save', async function(next) {
-  // TODO mongosh auth hook - to homework
   if (!this.isModified('password')) return next();
   // * оскільки "save" спрацьовує як при створенні, так і при зміні,
   // то перевірка вище викидає, якщо незмінювався пароль (тобто)
-  // якщо була зміна даних вже створенного юзера
+  // якщо була зміна даних вже створеного юзера
 
   // !наступні два рядка спрацьовують, якщо пароль модифікувався
   // * тобто при створенні юзера або зміні паролю

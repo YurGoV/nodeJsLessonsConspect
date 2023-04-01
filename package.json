@@ -1,15 +1,15 @@
 {
-  "name": "07",
+  "name": "08",
   "version": "1.0.0",
   "description": "",
-  "main": "./06/server.js",
+  "main": "./08/server.js",
   "scripts": {
-    "test": "nodemon ./07/server.js",
-    "dev": "NODE_ENV=development nodemon ./07/server.js",
-    "prod": "node ./07/server.js",
-    "start": "node ./07/server.js",
-    "lint": "eslint ./07/*.js",
-    "lint:fix": "eslint --fix ./07/*.js"
+    "test": "nodemon ./08/server.js",
+    "dev": "NODE_ENV=development nodemon ./08/server.js",
+    "prod": "node ./08/server.js",
+    "start": "node ./08/server.js",
+    "lint": "eslint ./08/*.js",
+    "lint:fix": "eslint --fix ./08/*.js"
   },
   "keywords": [],
   "author": "",
