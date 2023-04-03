@@ -7,6 +7,7 @@ require('dotenv').config({ path: './07/.env' });
 // const userController = require('./controllers/userControllers');
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
+const todoRouter = require('./routes/todoRoutes');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(express.json());
 // Routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/todos', todoRouter);
 
 app.all('*', (req, res) => {
   res.status(404).json({
@@ -82,3 +84,5 @@ app.listen(PORT, () => {
 // admin route/auth
 
 // todo: learn cron job
+// !normal relation in mongodb model!
+// * sorting (take from todoController)

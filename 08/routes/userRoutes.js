@@ -16,18 +16,16 @@ const { enums } = require('../constants');
 const router = express.Router();
 
 // router.post('/', userController.createUser);
+router.route('/').post(userMiddlewares.checkUserData, createUser);
 // router.get('/', userController.getUsers);
 
 router.use(protect);
 
-router.get('/me', getMe)
+router.get('/me', getMe);
 
 router.use(allowFor(enums.USER_ROLES.ADMIN, enums.USER_ROLES.MODERATOR));
 
-router
-  .route('/')
-  .post(userMiddlewares.checkUserData, createUser)
-  .get(getUsers);
+router.route('/').get(getUsers);
 
 // router.get('/:id', userController.getUsersById);
 // router.patch('/:id', userController.updateUserById);

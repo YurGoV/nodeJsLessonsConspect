@@ -1,0 +1,50 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDQzOTE2OSwiZXhwIjoxNjgwNjk4MzY5fQ.MgYKMfrEwJfAc_elTP-3m5GEuMGkIdWBjmXa_4hvHrc
+@token_admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU1NjhlNzhiZDAxNjQyOWUxMTRiMCIsImlhdCI6MTY4MDM0NDM3OCwiZXhwIjoxNjgwNjAzNTc4fQ.aGd1bwvf0it1SwcPWwlUg2MEPaEzQ0aUSFvZxKPDuIs
+
+### GET TODOS
+GET http://localhost:3000/api/v1/todos
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+### GET TODOS SORT TITLE
+GET http://localhost:3000/api/v1/todos?sort=title&order=ASC
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+### GET TODOS SORT COMMENTS
+GET http://localhost:3000/api/v1/todos?sort=comment&order=ASC
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+### GET TODOS SEARCH TITLE
+GET http://localhost:3000/api/v1/todos?search=todo2
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+
+### GET TODOS PAGINATION
+GET http://localhost:3000/api/v1/todos?limit=2&page=1
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+
+### POST todo
+POST http://localhost:3000/api/v1/todos
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "todo title",
+    "comment": "todo comment",
+    "due": "2023.05.05"
+}
+### POST todo2
+POST http://localhost:3000/api/v1/todos
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "todo4 title",
+    "comment": "todo comment",
+    "due": "2023.05.07"
+}

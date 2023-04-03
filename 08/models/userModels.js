@@ -39,7 +39,6 @@ const userSchema = new Schema(
   }
 );
 // TODO mongosh auth hook - to homework
-
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   // * оскільки "save" спрацьовує як при створенні, так і при зміні,
@@ -48,6 +47,7 @@ userSchema.pre('save', async function(next) {
 
   // !наступні два рядка спрацьовують, якщо пароль модифікувався
   // * тобто при створенні юзера або зміні паролю
+  // !в такому випадку не застосовуємо стрілочні функтції у якості колбеків
   const sault = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, sault);
 

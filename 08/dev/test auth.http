@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDEyNTk0NywiZXhwIjoxNjgwMzg1MTQ3fQ.Q45WMCSR0z0oX-NVofj2XImO6HmGLdcSoW4xBDcteG0
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDQzOTE2OSwiZXhwIjoxNjgwNjk4MzY5fQ.MgYKMfrEwJfAc_elTP-3m5GEuMGkIdWBjmXa_4hvHrc
 @token_admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU1NjhlNzhiZDAxNjQyOWUxMTRiMCIsImlhdCI6MTY4MDM0NDM3OCwiZXhwIjoxNjgwNjAzNTc4fQ.aGd1bwvf0it1SwcPWwlUg2MEPaEzQ0aUSFvZxKPDuIs
 ### GET USERS FROM USER
 GET http://localhost:3000/api/v1/users
@@ -18,7 +18,7 @@ content-type: application/json
 {
   "birthYear": 1983
 }
-### Create admin - id 6425568e78bd016429e114b0 ..
+### CREATE ADMIN - id 6425568e78bd016429e114b0 ..
 POST http://localhost:3000/api/v1/users
 content-type: application/json
 
@@ -29,7 +29,7 @@ content-type: application/json
   "birthYear": "1982",
   "role": "admin"
 }
-###\
+###
 ### LOGIN ADMIN
 POST http://localhost:3000/api/v1/auth/login
 content-type: application/json
@@ -69,7 +69,7 @@ content-type: application/json
 }
 ###
 
-###
+###  LOGIN USER
 POST http://localhost:3000/api/v1/auth/login
 content-type: application/json
 
@@ -79,3 +79,15 @@ content-type: application/json
 }
 ###
 
+### CREATE TEST ..
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+  "name": "Test",
+  "email": "email2212test@email.com",
+  "password": "123432&qwqeW",
+  "birthYear": "1982",
+  "role": "admin"
+}
+###

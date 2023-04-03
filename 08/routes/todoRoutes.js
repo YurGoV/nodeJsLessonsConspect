@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { todoController } = require('../controllers/todoController');
+const todoController = require('../controllers/todoController');
 
 /* const {
   getUsers,
@@ -10,9 +10,9 @@ const { todoController } = require('../controllers/todoController');
   deleteUserById,
   getMe,
 } = require('../controllers/userControllers'); // todo: try from index */
-const { userMiddlewares } = require('../../07/middlewares');
-const { protect, allowFor } = require('../../07/middlewares');
-const { enums } = require('../constants');
+const { userMiddlewares } = require('../middlewares');
+const { protect, allowFor } = require('../middlewares');
+// const { enums } = require('../constants');
 
 const router = express.Router();
 
@@ -21,9 +21,10 @@ const router = express.Router();
 
 router.use(protect);
 
-router.get('/', todoController.getTodosList);
+// router.get('/', todoController.getTodosList);
 router.post('/', todoController.createTodo);
+router.get('/', todoController.getTodosList);
 
-router.use(allowFor(enums.USER_ROLES.ADMIN, enums.USER_ROLES.MODERATOR));
+// router.use(allowFor(enums.USER_ROLES.ADMIN, enums.USER_ROLES.MODERATOR));
 
 module.exports = router;
