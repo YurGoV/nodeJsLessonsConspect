@@ -32,12 +32,36 @@ exports.getTodosList = catchAsyncWrapper(async (req, res) => {
   /*   const receivedTodos = await Todo.find().skip(skip).limit(paginationLimit);
   
  */
+  // const todosCount = await Todo.count();
+  // const receivedTodos = await Todo.find({title: {$regex: search, $options: 'i'}});
+
+  console.log('~search todoController.js [38]:', search);
+
+  const findOptions = search
+    ? { title: { $regex: search, $options: 'i' } }
+    : {};
+
+  console.log('CL: ~ file: todoController.js:39 ~ findOptions:', findOptions);
+
+  const todosQuery = Todo.find(findOptions);
+
+  todosQuery.sort(`${order === 'DESC' ? '-' : ''}${sort}`);
+
+  const paginationPage = +page || 1;
+  const paginationLimit = +limit || 2;
+  const skip = (paginationPage - 1) * paginationLimit;
+
+  todosQuery.skip(skip).limit(paginationLimit);
+
   const todosCount = await Todo.count();
-  const receivedTodos = await Todo.find({title: {$regex: search, $options: 'i'}});
+
+  const receivedTodos = await todosQuery;
 
   res.status(200).json({
     totalInResponse: receivedTodos.length,
     totalInDB: todosCount,
+    page: paginationPage,
+    perPage: paginationLimit,
     todos: receivedTodos,
   });
 });
