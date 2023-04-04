@@ -10,7 +10,6 @@ const checkSignupData = catchAsyncWrapper(async (req, res, next) => {
   const { error, value } = signupUserValidator(req.body);
 
   if (error) return next(new CustomError(400, error.details[0].message));
-  // if (error) return next(new CustomError(400, {mess: 'mess'}));
 
   const { email } = value;
 

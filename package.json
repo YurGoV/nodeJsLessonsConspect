@@ -8,7 +8,7 @@
     "dev": "NODE_ENV=development nodemon ./08/server.js",
     "prod": "node ./08/server.js",
     "start": "node ./08/server.js",
-    "lint": "eslint ./08/*.js",
+    "lint": "eslint ./08/**/*.js",
     "lint:fix": "eslint --fix ./08/*.js"
   },
   "keywords": [],

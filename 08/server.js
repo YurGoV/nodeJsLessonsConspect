@@ -19,9 +19,11 @@ const { MONGO_URL, NODE_ENV } = process.env;
 
 mongoose
   .connect(MONGO_URL)
-  .then((connection) => {
+  .then(() => {
+    // eslint-disable-next-line no-console
     console.log('connected to DB');
   })
+  // eslint-disable-next-line no-console
   .catch((error) => console.log(error));
 
 if (NODE_ENV === 'development') {
@@ -46,11 +48,11 @@ app.all('*', (req, res) => {
 /**
  * * Global error handler (middleware)
  */
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { status } = err; // there we get error status, that was setting on user useMiddlewares
 
   // if (!status) status = 500;
-
   if (NODE_ENV === 'development') {
     res.status(status || 500).json({
       message: err.message,
@@ -66,6 +68,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Server running up on port ${PORT}
   api available at http://localhost:${PORT}/api/v1/`);
 });

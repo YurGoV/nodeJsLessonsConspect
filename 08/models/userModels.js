@@ -39,6 +39,7 @@ const userSchema = new Schema(
   }
 );
 // TODO mongosh auth hook - to homework
+// eslint-disable-next-line func-names
 userSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   // * оскільки "save" спрацьовує як при створенні, так і при зміні,

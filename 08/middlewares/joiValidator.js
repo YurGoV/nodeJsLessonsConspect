@@ -36,7 +36,7 @@ exports.updateUserValidator = (data) =>
 
 /**
  * Validate signup user data.
- * *тут не кидаємо ролі/щоб юзер не зміг змінити ролі
+ * *тут не кидаємо ролі/щоб юзер не зміг їх змінити
  */
 exports.signupUserValidator = (data) =>
   Joi.object()
