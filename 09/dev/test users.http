@@ -1,0 +1,54 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDY3NDk0OCwiZXhwIjoxNjgwOTM0MTQ4fQ.YF0hqFTzPwMHI9pgo3_goyEoIFwRQD7LR4OfR2SbD1U
+@token_admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU1NjhlNzhiZDAxNjQyOWUxMTRiMCIsImlhdCI6MTY4MDY3NTEyOSwiZXhwIjoxNjgwOTM0MzI5fQ.U1Hx-Sr9CNwTRgWWKQoRiXDQZpkje4g8UTbjqOZOJwE
+
+### USER
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer {{token}}
+###
+### ADMIN
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer {{token_admin}}
+###
+GET http://localhost:3000/api/v1/users/64200a66f16f1209962f3079
+###
+DELETE http://localhost:3000/api/v1/users/64200ac115532a7774e74c6a
+###
+PATCH  http://localhost:3000/api/v1/users/642166c3bdd909be9a80507a
+content-type: application/json
+
+{
+  "birthYear": 1983
+}
+###
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+  "name": "Jackson",
+  "email": "email22@email.com",
+  "password": "Pass&1243",
+  "birthYear": "1982",
+  "role": "user"
+}
+###
+
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+    "name": "Jo",
+    "year": "1982"
+}
+###
+PATCH http://localhost:3000/api/v1/users/me
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Jackson",
+  "email": "email22@email.com",
+  "password": "Pass&1243",
+  "birthYear": "1982",
+  "role": "user"
+}
+###

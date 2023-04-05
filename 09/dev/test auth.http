@@ -1,0 +1,93 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDY3NDk0OCwiZXhwIjoxNjgwOTM0MTQ4fQ.YF0hqFTzPwMHI9pgo3_goyEoIFwRQD7LR4OfR2SbD1U
+@token_admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU1NjhlNzhiZDAxNjQyOWUxMTRiMCIsImlhdCI6MTY4MDY3NTEyOSwiZXhwIjoxNjgwOTM0MzI5fQ.U1Hx-Sr9CNwTRgWWKQoRiXDQZpkje4g8UTbjqOZOJwE
+### GET USERS FROM USER
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer {{token}}
+###
+### GET USERS FROM ADMIN
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer {{token_admin}}
+###
+GET http://localhost:3000/api/v1/users/64200a66f16f1209962f3079
+###
+DELETE http://localhost:3000/api/v1/users/6425564178bd016429e114ab
+###
+PATCH  http://localhost:3000/api/v1/users/642166c3bdd909be9a80507a
+content-type: application/json
+
+{
+  "birthYear": 1983
+}
+### CREATE ADMIN - id 6425568e78bd016429e114b0 ..
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+  "name": "Janet",
+  "email": "email2212@email.com",
+  "password": "123432&qwqeW",
+  "birthYear": "1982",
+  "role": "admin"
+}
+###
+### LOGIN ADMIN
+POST http://localhost:3000/api/v1/auth/login
+content-type: application/json
+
+{
+"email": "email2212@email.com",
+  "password": "123432&qwqeW"
+}
+###
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+    "name": "Jo",
+    "year": "1982"
+}
+###
+
+###
+POST http://localhost:3000/api/v1/auth/signup
+content-type: application/json
+
+{
+  "name": "Jackson222110",
+  "email": "email2221110@email.com",
+  "password": "Pass&1243",
+  "birthYear": "1982"
+}
+###
+###
+POST http://localhost:3000/api/v1/auth/login
+content-type: application/json
+
+{
+  "email": "email22@email.com",
+  "password": "Pass1243"
+}
+###
+
+###  LOGIN USER
+POST http://localhost:3000/api/v1/auth/login
+content-type: application/json
+
+{
+  "email": "email222@email.com",
+  "password": "Pass&1243"
+}
+###
+
+### CREATE TEST ..
+POST http://localhost:3000/api/v1/users
+content-type: application/json
+
+{
+  "name": "Test",
+  "email": "email2212test@email.com",
+  "password": "123432&qwqeW",
+  "birthYear": "1982",
+  "role": "admin"
+}
+###

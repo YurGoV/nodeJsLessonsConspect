@@ -1,0 +1,21 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDY3NDk0OCwiZXhwIjoxNjgwOTM0MTQ4fQ.YF0hqFTzPwMHI9pgo3_goyEoIFwRQD7LR4OfR2SbD1U
+
+###
+PATCH http://localhost:3000/api/v1/users/me
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=boundary
+Content-Disposition: form-data; name="data"; filename="data"
+
+
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="user.png"
+Content-Type: image/png
+
+< ./user.png
+--boundary--
+###
+
+###
+GET http://localhost:3000/api/avatars/fakeAvatar_.png
+
+###

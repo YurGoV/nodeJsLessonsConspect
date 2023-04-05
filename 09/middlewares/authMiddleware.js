@@ -10,7 +10,6 @@ const checkSignupData = catchAsyncWrapper(async (req, res, next) => {
   const { error, value } = signupUserValidator(req.body);
 
   if (error) return next(new CustomError(400, error.details[0].message));
-  // if (error) return next(new CustomError(400, {mess: 'mess'}));
 
   const { email } = value;
 
@@ -23,6 +22,9 @@ const checkSignupData = catchAsyncWrapper(async (req, res, next) => {
   next();
 });
 
+/**
+ * * middleware allow only loginned users
+ */
 const protect = catchAsyncWrapper(async (req, res, next) => {
   const token =
     req.headers.authorization?.startsWith('Bearer') &&
@@ -33,6 +35,8 @@ const protect = catchAsyncWrapper(async (req, res, next) => {
   const decodedToken = jwt.verify(token, JWT_SECRET);
 
   const currentUser = await User.findById(decodedToken.id);
+
+  if (!currentUser) return next(new CustomError(401, 'You are not logged in..'));
 
   req.user = currentUser;
 
@@ -49,7 +53,7 @@ const allowFor = (...roles) =>
   (req, res, next) => {
     if (roles.includes(req.user.role)) return next();
 
-    return next(new CustomError(403, 'You are have no permissions')); // TODO: try this in noAsync in rest-api-test
+    return next(new CustomError(403, 'You are have no permissions')); // todo: try this in noAsync in rest-api-test
   };
 
 module.exports = {
