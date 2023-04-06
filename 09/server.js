@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 require('dotenv').config({ path: './09/.env' });
 
-// const userController = require('./controllers/userControllers');
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
 const todoRouter = require('./routes/todoRoutes');
@@ -15,7 +14,7 @@ const app = express();
  * * needed for development only (morgan installed as dev-dependency)
  */
 const PORT = process.env.PORT || 4000;
-const { MONGO_URL, NODE_ENV } = process.env;
+const { MONGO_URL, NODE_ENV, WORK_DIR } = process.env;
 
 mongoose
   .connect(MONGO_URL)
@@ -34,7 +33,7 @@ if (NODE_ENV === 'development') {
 app.use(cors());
 
 // serve static files
-app.use(express.static('09/static')); // TODO: not work (((
+app.use(express.static(`${WORK_DIR}/static`));
 
 app.use(express.json());
 
@@ -56,7 +55,6 @@ app.all('*', (req, res) => {
 app.use((err, req, res, next) => {
   const { status } = err; // there we get error status, that was setting on user useMiddlewares
 
-  // if (!status) status = 500;
   if (NODE_ENV === 'development') {
     res.status(status || 500).json({
       message: err.message,
@@ -97,6 +95,7 @@ app.listen(PORT, () => {
 // *populate (to take owner in received contact) ~ file: todoController.js:38 ~ receivedTodos:'
 // *multer - file extension and type check by mime
 
-// * lern how imageService work
+// * learn how imageService work
+// * change/reset passwd
 
 // * reset url from authController

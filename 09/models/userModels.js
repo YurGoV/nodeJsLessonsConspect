@@ -1,5 +1,3 @@
-/* eslint-disable func-names */
-// const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
@@ -7,7 +5,6 @@ const { Schema, model } = require('mongoose');
 
 const { enums } = require('../constants');
 
-// const userSchema = new mongoose.Schema;
 const userSchema = new Schema(
   {
     name: {
@@ -66,7 +63,7 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.checkPassword = (candidate, hash) =>
   bcrypt.compare(candidate, hash);
 
-// eslint-disable-next-line space-before-function-paren
+// eslint-disable-next-line func-names
 userSchema.methods.createOtp = function () {
   const otp = crypto.randomBytes(18).toString('hex');
 
