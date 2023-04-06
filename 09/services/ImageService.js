@@ -28,7 +28,12 @@ class ImageService {
 
   static async save(file, options, ...pathSegments) {
     const fileName = `${uuid()}.jpeg`;
-    const fullFilePath = path.join(process.cwd(), WORK_DIR, 'static', ...pathSegments);
+    const fullFilePath = path.join(
+      process.cwd(),
+      WORK_DIR,
+      'static',
+      ...pathSegments
+    );
 
     await fse.ensureDir(fullFilePath);
 

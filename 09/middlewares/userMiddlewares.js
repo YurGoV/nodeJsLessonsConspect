@@ -11,7 +11,7 @@ const User = require('../models/userModels');
 const { createUserValidator } = require('./joiValidator');
 
 // const { WORK_DIR } = process.env;
-// const multerUsersStoragePath = path.join(WORK_DIR, 'static', 'img', 'users');
+// const multerUsersStoragePath = pa th.join(WORK_DIR, 'static', 'img', 'users');
 
 /**
  * * Check new user data.
@@ -80,3 +80,20 @@ exports.uploadUserPhoto = multer({
 // console.log('~typeif ImageService userMiddlewares.js [79]:', typeof ImageService);
 
 exports.uploadUserPhoto = ImageService.upload('avatar');
+
+exports.checkPassword = catchAsyncWrapper(async (req, res, next) => {
+  // * validator needed
+  const { currentPassword, newPassword } = req.body;
+
+  const user = await User.findById(req.user.id).select('password');
+
+  if (!(await user.checkPassword(currentPassword, user.password))) {
+    return next(new CustomError(401, 'Current password is wrong..'));
+  }
+
+  user.password = newPassword;
+
+  await user.save();
+
+  next();
+});

@@ -98,3 +98,5 @@ app.listen(PORT, () => {
 // *multer - file extension and type check by mime
 
 // * lern how imageService work
+
+// * reset url from authController

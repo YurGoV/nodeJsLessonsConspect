@@ -72,8 +72,8 @@ exports.deleteUserById = catchAsyncWrapper(async (req, res) => {
   res.sendStatus(204); // ** if no need to response smth // status 204 - no content
 });
 
-exports.getMe = (req) => {
-  req.status(200).json({
+exports.getMe = (req, res) => {
+  res.status(200).json({
     user: req.user,
   });
 };
@@ -100,3 +100,9 @@ exports.updateAvatar = catchAsyncWrapper(async (req, res) => {
     user: updatedUser,
   });
 });
+
+exports.updateMyPassword = (req, res) => {
+  res.status(200).json({
+    user: req.user,
+  });
+};

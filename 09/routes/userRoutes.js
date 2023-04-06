@@ -8,6 +8,7 @@ const {
   deleteUserById,
   getMe,
   updateAvatar,
+  updateMyPassword,
 } = require('../controllers/userControllers'); // TODO: try from index
 
 const { userMiddlewares } = require('../middlewares');
@@ -22,6 +23,11 @@ router.use(protect);
 
 router.get('/me', getMe);
 router.patch('/me', userMiddlewares.uploadUserPhoto, updateAvatar);
+router.patch(
+  '/update-my-password',
+  userMiddlewares.checkPassword,
+  updateMyPassword,
+);
 
 router.use(allowFor(enums.USER_ROLES.ADMIN, enums.USER_ROLES.MODERATOR));
 

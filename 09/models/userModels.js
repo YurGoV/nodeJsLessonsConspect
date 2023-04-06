@@ -1,5 +1,7 @@
+/* eslint-disable func-names */
 // const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const { Schema, model } = require('mongoose');
 
@@ -37,6 +39,8 @@ const userSchema = new Schema(
       enum: Object.values(enums.USER_ROLES),
       default: enums.USER_ROLES.USER,
     },
+    otpHashed: String,
+    otpExpires: Date,
   },
   {
     timestamps: true,
@@ -44,7 +48,7 @@ const userSchema = new Schema(
 );
 // TODO mongosh auth hook - to homework
 // eslint-disable-next-line func-names
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   // * оскільки "save" спрацьовує як при створенні, так і при зміні,
   // то перевірка вище викидає, якщо незмінювався пароль (тобто)
@@ -61,6 +65,16 @@ userSchema.pre('save', async function(next) {
 
 userSchema.methods.checkPassword = (candidate, hash) =>
   bcrypt.compare(candidate, hash);
+
+// eslint-disable-next-line space-before-function-paren
+userSchema.methods.createOtp = function () {
+  const otp = crypto.randomBytes(18).toString('hex');
+
+  this.otpHashed = crypto.createHash('sha256').update(otp).digest('hex');
+  this.otpExpires = Date.now() + 10 * 60 * 1000; // 10 minutes in milliseconds
+
+  return otp;
+};
 
 const User = model('User', userSchema);
 
