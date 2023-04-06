@@ -1,7 +1,11 @@
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjQ1MWZiZjBjZGFiYTQ0NmVlMmYwNiIsImlhdCI6MTY4MDY3NDk0OCwiZXhwIjoxNjgwOTM0MTQ4fQ.YF0hqFTzPwMHI9pgo3_goyEoIFwRQD7LR4OfR2SbD1U
 @token_admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU1NjhlNzhiZDAxNjQyOWUxMTRiMCIsImlhdCI6MTY4MDY3NTEyOSwiZXhwIjoxNjgwOTM0MzI5fQ.U1Hx-Sr9CNwTRgWWKQoRiXDQZpkje4g8UTbjqOZOJwE
 
-### USER
+### USER1 id 642451fbf0cdaba446ee2f06
+GET http://localhost:3000/api/v1/users
+Authorization: Bearer {{token}}
+###
+### USER2 id 
 GET http://localhost:3000/api/v1/users
 Authorization: Bearer {{token}}
 ###
@@ -9,6 +13,7 @@ Authorization: Bearer {{token}}
 GET http://localhost:3000/api/v1/users
 Authorization: Bearer {{token_admin}}
 ###
+
 GET http://localhost:3000/api/v1/users/64200a66f16f1209962f3079
 ###
 DELETE http://localhost:3000/api/v1/users/64200ac115532a7774e74c6a

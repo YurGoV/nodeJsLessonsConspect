@@ -9,6 +9,7 @@ const {
   getMe,
   updateAvatar,
 } = require('../controllers/userControllers'); // TODO: try from index
+
 const { userMiddlewares } = require('../middlewares');
 const { protect, allowFor } = require('../middlewares');
 const { enums } = require('../constants');

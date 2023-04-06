@@ -1,16 +1,17 @@
 const {
   Types: { ObjectId },
 } = require('mongoose');
-const path = require('node:path');
-const multer = require('multer');
-const { v4: uuid } = require('uuid');
+// const path = require('node:path');
+const ImageService = require('../services/ImageService');
+// const multer = require('multer');
+// const { v4: uuid } = require('uuid');
 
 const { CustomError, catchAsyncWrapper } = require('../utils');
 const User = require('../models/userModels');
 const { createUserValidator } = require('./joiValidator');
 
-const { WORK_DIR } = process.env;
-const multerUsersStoragePath = path.join(WORK_DIR, 'static', 'img', 'users');
+// const { WORK_DIR } = process.env;
+// const multerUsersStoragePath = path.join(WORK_DIR, 'static', 'img', 'users');
 
 /**
  * * Check new user data.
@@ -53,7 +54,7 @@ exports.checkUserId = async (req, res, next) => {
   }
 };
 
-const multerStorage = multer.diskStorage({
+/* const multerStorage = multer.diskStorage({
   destination: (req, file, clb) => {
     clb(null, multerUsersStoragePath);
   },
@@ -74,4 +75,8 @@ const multerFileFilter = (req, file, clb) => {
 exports.uploadUserPhoto = multer({
   storage: multerStorage,
   fileFilter: multerFileFilter,
-}).single('avatar');
+}).single('avatar'); */
+
+// console.log('~typeif ImageService userMiddlewares.js [79]:', typeof ImageService);
+
+exports.uploadUserPhoto = ImageService.upload('avatar');

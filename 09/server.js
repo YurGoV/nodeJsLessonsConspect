@@ -91,6 +91,10 @@ app.listen(PORT, () => {
 // admin route/auth
 
 // TODO: learn cron job
+
 // !normal relation in mongodb model!
 // * sorting (take from todoController)
 // *populate (to take owner in received contact) ~ file: todoController.js:38 ~ receivedTodos:'
+// *multer - file extension and type check by mime
+
+// * lern how imageService work

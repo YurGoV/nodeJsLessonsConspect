@@ -1,5 +1,6 @@
 const { catchAsyncWrapper } = require('../utils');
 const User = require('../models/userModels');
+const ImageService = require('../services/ImageService');
 
 // TODO: with catchAsync more shortened:
 exports.getUsers = catchAsyncWrapper(async (req, res) => {
@@ -77,10 +78,25 @@ exports.getMe = (req) => {
   });
 };
 
-exports.updateAvatar = catchAsyncWrapper((req, res) => {
-  const { user } = req;
+exports.updateAvatar = catchAsyncWrapper(async (req, res) => {
+  const { user, file } = req; // *multer закидає файл у реквест, тому беремо його з реквесту
+  if (file) {
+    user.avatar = await ImageService.save(
+      file,
+      null,
+      'images',
+      'users',
+      user.id
+    );
+  }
+
+  Object.keys(req.body).forEach((key) => {
+    user[key] = req.body[key];
+  });
+
+  const updatedUser = await user.save();
 
   res.status(200).json({
-    user,
+    user: updatedUser,
   });
 });

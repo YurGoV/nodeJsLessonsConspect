@@ -28,6 +28,10 @@ const userSchema = new Schema(
       select: false, // TODO: * don't show password on selects queries
       required: true,
     },
+    avatar: {
+      type: String,
+      default: 'user.png',
+    },
     role: {
       type: String,
       enum: Object.values(enums.USER_ROLES),
